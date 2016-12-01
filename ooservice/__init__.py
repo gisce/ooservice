@@ -374,6 +374,7 @@ class ModelWrapper(object):
         self.dbname = dbname
         self.uid = uid
         self.txn = Transaction().start(self.dbname, user=self.uid)
+        self.txn.cursor.autocommit(True)
 
     def __getattr__(self, item):
         base = getattr(self.model, item)
@@ -381,7 +382,6 @@ class ModelWrapper(object):
             def wrapper(*args):
                 newargs = (self.txn.cursor, self.txn.user) + args
                 res = base(*newargs)
-                self.txn.cursor.commit()
                 return res
             return wrapper
         else:
