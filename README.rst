@@ -3,7 +3,7 @@ OpenObject Service
 
 Access to OpenObject API without XML-RPC and a similiar API from ERPPeek.
 
-.. code-block: python
+.. code-block:: python
 
     from ooservice import OpenERPService, PoolWrapper
     service = OpenERPService()
