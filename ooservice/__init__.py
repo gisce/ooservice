@@ -117,9 +117,6 @@ class OpenERPService(object):
         module_obj = self.pool.get('ir.module.module')
         with Transaction().start(self.config['db_name']) as txn:
             module_obj.update_list(txn.cursor, txn.user)
-            modules_ids = module_obj.search(txn.cursor,txn.user,[])
-            names = module_obj.read(txn.cursor, txn.user, modules_ids, ['name'])
-            print 'names:{}'.format(names)
             module_ids = module_obj.search(
                 txn.cursor, self.DEFAULT_USER,
                 [('name', '=', module)],
