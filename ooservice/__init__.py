@@ -376,9 +376,9 @@ class ModelWrapper(object):
     def __getattr__(self, item):
         base = getattr(self.model, item)
         if callable(base):
-            def wrapper(*args):
+            def wrapper(*args, **kwargs):
                 newargs = (self.txn.cursor, self.txn.user) + args
-                res = base(*newargs)
+                res = base(*newargs, **kwargs)
                 return res
             return wrapper
         else:
